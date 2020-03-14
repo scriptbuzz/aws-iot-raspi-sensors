@@ -1,8 +1,9 @@
-# Name: Mike Bitar
-# Project: Environmental Sensors Loggging
+# Name: M Bitar
+# Project: Demo - Environmental Sensors Loggging
 # Date: March 14, 2020
 #
 from sense_hat import SenseHat
+
 from time import sleep
 #sleep(1)
 from random import randint
@@ -54,3 +55,9 @@ while (True):
     sleep(sleep_val )
     
     print("=" * 30)
+    
+    for event in sense.stick.get_events():
+    # quit if button pressed
+        sense.clear(0, 0, 0)
+        quit()
+

@@ -47,16 +47,13 @@ black = (0, 0, 0)
 sense.clear((0, 0, 0))
 back_clr = (0, 0, 0)
 
-GO=False
-WARN=False
-ALARM=False
+GO=WARN=ALARM=False
 
-
-sense.show_letter("A", red)
+sense.show_letter("A", blue)
 sleep(1)
-sense.show_letter("W", red)
+sense.show_letter("W", blue)
 sleep(1)
-sense.show_letter("S", red)
+sense.show_letter("S", blue)
 sleep(1)
 #sense.show_message("AWS IoT Prototype", text_colour=red, back_colour=back_clr, scroll_speed=.05)
 
@@ -69,7 +66,7 @@ def customCallback(client, userdata, message):
     global WARN,ALARM, GO
     print(message.payload)
     if "WARN" in message.payload:
-        print("===== ATTENTION: EXECUTE STOP COMMMAND =====")
+        print("===== ATTENTION: EXECUTE WARN COMMMAND =====")
         WARN=True
 
     elif "ALARM" in message.payload:
@@ -180,21 +177,23 @@ while True:
         print("WWWWWWWWWWWWWWWWWWWWWWWW")
         sense.clear(yellow)
         sleep(3)
-        WARN=False               
+        WARN=False      
+        
+    GO=WARN=ALARM=False
     temp = sense.get_temperature()
     print("Temp: "+str(round(temp)))
-    sense.show_message("T:"+str(round(temp)), text_colour=red, back_colour=back_clr, scroll_speed=text_speed)
+    sense.show_message("T:"+str(round(temp)), text_colour=blue, back_colour=back_clr, scroll_speed=text_speed)
     sense.clear((0, 0, 0))
     sleep(sleep_val )
     
     humidity = sense.get_humidity()
     print("Humidity: "+str(round(humidity)))
-    sense.show_message("H:"+str(round(humidity)), text_colour=red, back_colour=back_clr, scroll_speed=text_speed)
+    sense.show_message("H:"+str(round(humidity)), text_colour=blue, back_colour=back_clr, scroll_speed=text_speed)
     sleep(sleep_val )
     
     pressure = sense.get_pressure()
     print("Pressure: "+str(round(pressure)))
-    sense.show_message("P:"+str(round(pressure)), text_colour=red, back_colour=back_clr, scroll_speed=text_speed)
+    sense.show_message("P:"+str(round(pressure)), text_colour=blue, back_colour=back_clr, scroll_speed=text_speed)
     sense.clear((0, 0, 0))
     sleep(sleep_val )
     

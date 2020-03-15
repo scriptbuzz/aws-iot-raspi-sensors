@@ -28,6 +28,8 @@ import time
 import argparse
 import json
 
+print("===== V0.12 ======")
+sleep(3)
 sleep_val = .1
 text_speed = .05
 sense = SenseHat()
@@ -47,7 +49,7 @@ black = (0, 0, 0)
 sense.clear((0, 0, 0))
 back_clr = (0, 0, 0)
 
-GO=WARN=ALARM=False
+GO=WARN=ALARM=STOP=False
 
 sense.show_letter("A", blue)
 sleep(1)
@@ -63,7 +65,7 @@ AllowedActions = ['both', 'publish', 'subscribe']
 # Custom MQTT message callback
 def customCallback(client, userdata, message):
     #print("Received a new command: ")
-    global WARN,ALARM, GO
+    global WARN, ALARM, GO, STOP
     print(message.payload)
     if "WARN" in message.payload:
         print("===== ATTENTION: EXECUTE WARN COMMMAND =====")
@@ -76,6 +78,10 @@ def customCallback(client, userdata, message):
     elif "GO" in message.payload:
         print("===== ATTENTION: EXECUTE GO COMMMAND =====")  
         GO=True
+        
+    elif "STOP" in message.payload:
+        print("===== ATTENTION: EXECUTE STOP COMMMAND =====")  
+        STOP=True
 
            
     #print("from topic: ")
@@ -177,9 +183,16 @@ while True:
         print("WWWWWWWWWWWWWWWWWWWWWWWW")
         sense.clear(yellow)
         sleep(3)
-        WARN=False      
+        WARN=False
+    if STOP:
+        print("SSSSSSSSSSSSSSSSSSSSS")
+        sense.clear(blue)
+        sleep(3)
+        STOP=False
+        sense.clear()
+        quit()
         
-    GO=WARN=ALARM=False
+    GO=WARN=ALARM=STOP=False
     temp = sense.get_temperature()
     print("Temp: "+str(round(temp)))
     sense.show_message("T:"+str(round(temp)), text_colour=blue, back_colour=back_clr, scroll_speed=text_speed)

@@ -27,9 +27,11 @@ import logging
 import time
 import argparse
 import json
+import datetime
 
-print("===== V0.12 ======")
-sleep(3)
+
+print("===== V0.13 ======")
+sleep(2)
 sleep_val = .1
 text_speed = .05
 sense = SenseHat()
@@ -212,8 +214,9 @@ while True:
     
     if args.mode == 'both' or args.mode == 'publish':
         message = {}
-        message['message'] = "TEMP"
-        message['sequence'] = str(round(temp))
+        #message['message'] = "TEMP"
+        message['TEMP'] = str(round(temp))
+        message['now'] = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S:%f")
         messageJson = json.dumps(message)
         myAWSIoTMQTTClient.publish(topic, messageJson, 1)
         if args.mode == 'publish':
@@ -221,8 +224,9 @@ while True:
         loopCount += 1
         
         message = {}
-        message['message'] = "HUMIDITY"
-        message['sequence'] = str(round(humidity))
+        #message['message'] = "HUMIDITY"
+        message['HUMIDITY'] = str(round(humidity))
+        message['now'] = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S:%f")
         messageJson = json.dumps(message)
         myAWSIoTMQTTClient.publish(topic, messageJson, 1)
         if args.mode == 'publish':
@@ -230,8 +234,9 @@ while True:
         loopCount += 1
         
         message = {}
-        message['message'] = "PRESSURE"
-        message['sequence'] = str(round(pressure))
+        #message['message'] = "PRESSURE"
+        message['PRESSURE'] = str(round(pressure))
+        message['now'] = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S:%f")
         messageJson = json.dumps(message)
         myAWSIoTMQTTClient.publish(topic, messageJson, 1)
         if args.mode == 'publish':

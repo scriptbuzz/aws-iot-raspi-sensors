@@ -14,12 +14,13 @@
  * permissions and limitations under the License.
  */
  '''
-from sense_hat import SenseHat
+# Name: M Bitar
+# Date: March 15, 2020
+# Project: AWS IoT Sensor Node
 
+from sense_hat import SenseHat
 from time import sleep
-#sleep(1)
 from random import randint
-#num = randint(0,10)
 
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 import logging
@@ -31,28 +32,58 @@ sleep_val = .1
 text_speed = .05
 sense = SenseHat()
 sense.clear()
+
 r = 255
 g = 255
 b = 255
 
-sense.clear((0, 0, 0))
-red = (r,0,0)
-back_clr = (0, 0, 0)
+red = (255, 0, 0)
+blue = (0, 0, 255)
+green = (0, 255, 0)
+white = (255, 255, 255)
+yellow = (255, 255, 0)
 black = (0, 0, 0)
-sense.show_message("AWS IoT Prototype", text_colour=red, back_colour=back_clr, scroll_speed=.05)
+
+sense.clear((0, 0, 0))
+back_clr = (0, 0, 0)
+
+GO=False
+WARN=False
+ALARM=False
+
+
+sense.show_letter("A", red)
+sleep(1)
+sense.show_letter("W", red)
+sleep(1)
+sense.show_letter("S", red)
+sleep(1)
+#sense.show_message("AWS IoT Prototype", text_colour=red, back_colour=back_clr, scroll_speed=.05)
 
 
 AllowedActions = ['both', 'publish', 'subscribe']
 
 # Custom MQTT message callback
 def customCallback(client, userdata, message):
-    print("Received a new command: ")
+    #print("Received a new command: ")
+    global WARN,ALARM, GO
     print(message.payload)
-    if "STOP" in message.payload:
-        print("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ")
-    print("from topic: ")
-    print(message.topic)
-    print("--------------\n\n")
+    if "WARN" in message.payload:
+        print("===== ATTENTION: EXECUTE STOP COMMMAND =====")
+        WARN=True
+
+    elif "ALARM" in message.payload:
+        print("===== ATTENTION: EXECUTE ALARM COMMMAND =====") 
+        ALARM=True 
+
+    elif "GO" in message.payload:
+        print("===== ATTENTION: EXECUTE GO COMMMAND =====")  
+        GO=True
+
+           
+    #print("from topic: ")
+    #print(message.topic)
+    #print("--------------\n\n")
 
 
 # Read in command-line parameters
@@ -135,8 +166,23 @@ time.sleep(2)
 # Publish to the same topic in a loop forever
 loopCount = 0
 while True:
+    if GO:
+        print("GGGGGGGGGGGGGGGGGGGGGGGGG")
+        sense.clear(green)
+        sleep(3)
+        Go=False
+    if ALARM:
+        print("AAAAAAAAAAAAAAAAAAAAAAAA")
+        sense.clear(red)
+        sleep(3)
+        ALARM=False 
+    if WARN:
+        print("WWWWWWWWWWWWWWWWWWWWWWWW")
+        sense.clear(yellow)
+        sleep(3)
+        WARN=False               
     temp = sense.get_temperature()
-    print("Temp: "+str(temp))
+    print("Temp: "+str(round(temp)))
     sense.show_message("T:"+str(round(temp)), text_colour=red, back_colour=back_clr, scroll_speed=text_speed)
     sense.clear((0, 0, 0))
     sleep(sleep_val )

@@ -30,7 +30,7 @@ import json
 import datetime
 
 
-print("===== V0.13 ======")
+print("===== V0.14 ======")
 sleep(2)
 sleep_val = .1
 text_speed = .05

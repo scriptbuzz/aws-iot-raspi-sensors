@@ -30,16 +30,14 @@ import json
 import datetime
 
 
-print("===== V0.14 ======")
+print("===== V0.15 ======")
 sleep(2)
 sleep_val = .1
 text_speed = .05
 sense = SenseHat()
 sense.clear()
 
-r = 255
-g = 255
-b = 255
+r = g = b = 255
 
 red = (255, 0, 0)
 blue = (0, 0, 255)
@@ -47,9 +45,9 @@ green = (0, 255, 0)
 white = (255, 255, 255)
 yellow = (255, 255, 0)
 black = (0, 0, 0)
+back_clr = (0, 0, 0)
 
 sense.clear((0, 0, 0))
-back_clr = (0, 0, 0)
 
 GO=WARN=ALARM=STOP=False
 
@@ -89,7 +87,6 @@ def customCallback(client, userdata, message):
     #print("from topic: ")
     #print(message.topic)
     #print("--------------\n\n")
-
 
 # Read in command-line parameters
 parser = argparse.ArgumentParser()
@@ -172,7 +169,7 @@ time.sleep(2)
 loopCount = 0
 while True:
     if GO:
-        print("GGGGGGGGGGGGGGGGGGGGGGGGG")
+        print("GGGGGGGGGGGGGGGGGGGGGGG")
         sense.clear(green)
         sleep(3)
         Go=False
@@ -187,7 +184,7 @@ while True:
         sleep(3)
         WARN=False
     if STOP:
-        print("SSSSSSSSSSSSSSSSSSSSS")
+        print("SSSSSSSSSSSSSSSSSSSSSSSS")
         sense.clear(blue)
         sleep(3)
         STOP=False
@@ -195,6 +192,7 @@ while True:
         quit()
         
     GO=WARN=ALARM=STOP=False
+    
     temp = sense.get_temperature()
     print("Temp: "+str(round(temp)))
     sense.show_message("T:"+str(round(temp)), text_colour=blue, back_colour=back_clr, scroll_speed=text_speed)
@@ -214,9 +212,10 @@ while True:
     
     if args.mode == 'both' or args.mode == 'publish':
         message = {}
-        #message['message'] = "TEMP"
-        message['TEMP'] = str(round(temp))
-        message['now'] = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S:%f")
+        message['SENSOR_TYPE'] = "TEMP"
+        message['VALUE'] = str(round(temp))
+        message['NOW'] = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S:%f")
+        message['NODE_ID'] = "A024"
         messageJson = json.dumps(message)
         myAWSIoTMQTTClient.publish(topic, messageJson, 1)
         if args.mode == 'publish':
@@ -224,9 +223,10 @@ while True:
         loopCount += 1
         
         message = {}
-        #message['message'] = "HUMIDITY"
-        message['HUMIDITY'] = str(round(humidity))
-        message['now'] = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S:%f")
+        message['SENSOR_TYPE'] = "HUMIDITY"
+        message['VALUE'] = str(round(humidity))
+        message['NOW'] = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S:%f")
+        message['NODE_ID'] = "A024"
         messageJson = json.dumps(message)
         myAWSIoTMQTTClient.publish(topic, messageJson, 1)
         if args.mode == 'publish':
@@ -234,9 +234,10 @@ while True:
         loopCount += 1
         
         message = {}
-        #message['message'] = "PRESSURE"
-        message['PRESSURE'] = str(round(pressure))
-        message['now'] = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S:%f")
+        message['SENSOR_TYPE'] = "PRESSURE"
+        message['VALUE'] = str(round(pressure))
+        message['NOW'] = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S:%f")
+        message['NODE_ID'] = "A024"
         messageJson = json.dumps(message)
         myAWSIoTMQTTClient.publish(topic, messageJson, 1)
         if args.mode == 'publish':

@@ -1,6 +1,6 @@
 # awsiotproto01
 
-Project Description
-Components
-Installation
-Testing
+- Project Description
+- Components
+- Installation & Configuration
+- Testing

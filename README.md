@@ -8,10 +8,10 @@
 - Refer to the AWS architecture diagram at the end of this page. 
 
 -  Project Components:
--- Raspberry Pi - https://www.raspberrypi.org/
--- Raspberry Pi Sense Hat - https://www.raspberrypi.org/products/sense-hat/
--- AWS Account
--- Wifi network + internet access
+   -- Raspberry Pi - https://www.raspberrypi.org/
+   -- Raspberry Pi Sense Hat - https://www.raspberrypi.org/products/sense-hat/
+   -- AWS Account
+   -- Wifi network + internet access
 
 # aws account setup
 

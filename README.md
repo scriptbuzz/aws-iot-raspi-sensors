@@ -34,5 +34,5 @@
 
   https://github.com/scriptbuzz/aws-iot-raspi-sensors/blob/master/aws-iot-test01.py
 
-# aws arcbitecture diagram 
+
   ![GitHub Logo](mbx-aws-iot-raspi-sensors.jpg)

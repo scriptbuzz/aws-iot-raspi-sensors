@@ -9,7 +9,7 @@ Use AWS IoT to monitor and control a Raspberry Pi based on readings of environme
 
 - Refer to the AWS architecture diagram at the end of this page. 
 
-- Project Components:
+-  Project Components:
 -- Raspberry Pi - https://www.raspberrypi.org/
 -- Raspberry Pi Sense Hat - https://www.raspberrypi.org/products/sense-hat/
 -- AWS Account

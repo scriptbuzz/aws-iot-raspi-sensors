@@ -6,3 +6,6 @@
 -- Pi Hat
 - Installation & Configuration
 - Testing
+
+
+![GitHub Logo](mbx-aws-iot-raspi-sensors.jpg)

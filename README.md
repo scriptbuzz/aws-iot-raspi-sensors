@@ -1,6 +1,6 @@
 # aws-iot-raspi-sensors
 
-  In this project I use the AWS IoT Core service to monitor and control a Raspberry Pi and the Sensor HAT, over the internet, based on readings of environmental and motion sensors. The Raspberry Pi has built-in support for WiFi. The Sensor HAT has an array of sensors including: gyroscope, accelerometer, magnetometer, temperature, barometric pressure, and humidity. Additional sensors can be added to the Raspberry Pi. An AWS Lambda function tests the values of sensor readings passed to it via AWS IoT Rule, then sends back a control action if a sensor value goes above or below a certain threshold  that you set.
+  In this project I use the AWS IoT Core service to monitor and control a Raspberry Pi, over the internet, based on readings of environmental and motion sensors built into the Sense HAT. The Raspberry Pi has built-in support for WiFi which allows it to be connected over the internet to AWS services. The Sense HAT has an array of sensors including: gyroscope, accelerometer, magnetometer, temperature, barometric pressure, and humidity. Additional sensors can be attached to the Raspberry Pi. The values of sensor readings are passed from the Raspberry Pi it via an MQTT topic subscribed to by the AWS IoT Core service. An IoT Rule routes the MQTT topic values to SNS, DynamoDB, and Lambda. Lambda then sends back control commands to the MQTT topic when a sensor value goes above or below a certain threshold, set by the developer.
 
 
 - To see the project in action, watch this YouTube video

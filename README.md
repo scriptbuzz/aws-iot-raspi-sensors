@@ -1,8 +1,6 @@
 # aws-iot-raspi-sensors
 
-project description
-
-  Use AWS IoT to monitor and control a Raspberry Pi based on readings of environmental and motion sensors. 
+  This project uses the AWS IoT Core service to monitor and control a Raspberry Pi over the internet based on readings of environmental and motion sensors. 
 
 - To see the project in action, watch this YouTube video
 -- https://www.youtube.com/watch?v=f7IWtVbQ5dQ
@@ -15,13 +13,13 @@ project description
 -- AWS Account
 -- Wifi network + internet access
 
-aws account setup
+# aws account setup
 
 - Create a Lambda function in your account using this code as basis. Customize as needed
 
   https://github.com/scriptbuzz/aws-iot-raspi-sensors/blob/master/IoTLambdaSensorResponse.py
 
-raspberry pi setup
+# raspberry pi setup
 
 - Follow the instructions on the AWS guide to install the AWS IoT Python SDK on your Raspberry Pi
 
@@ -36,5 +34,5 @@ raspberry pi setup
 
   https://github.com/scriptbuzz/aws-iot-raspi-sensors/blob/master/aws-iot-test01.py
 
-aws arcbitecture diagram 
-![GitHub Logo](mbx-aws-iot-raspi-sensors.jpg)
+# aws arcbitecture diagram 
+  ![GitHub Logo](mbx-aws-iot-raspi-sensors.jpg)

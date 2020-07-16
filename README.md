@@ -5,15 +5,13 @@
 Use AWS IoT to monitor and control a Raspberry Pi based on readings of environmental and motion sensors. 
 
 - To see the project in action, watch this YouTube video
+-- https://www.youtube.com/watch?v=f7IWtVbQ5dQ
 
-https://www.youtube.com/watch?v=f7IWtVbQ5dQ
-
-- Refer to the AWS architecture diagram at the end of this. 
+- Refer to the AWS architecture diagram at the end of this page. 
 
 - Project Components:
-
--- ![Raspberry Pi](https://www.raspberrypi.org/)
--- ![Raspberry Pi Sense Hat](https://www.raspberrypi.org/products/sense-hat/)
+-- Raspberry Pi - https://www.raspberrypi.org/
+-- Raspberry Pi Sense Hat - https://www.raspberrypi.org/products/sense-hat/
 -- AWS Account
 -- Wifi network + internet access
 

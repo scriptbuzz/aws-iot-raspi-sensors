@@ -1,6 +1,13 @@
 # aws-iot-raspi-sensors
 
 - Project Description
+
+Watch the project video on YouTube
+
+https://www.youtube.com/watch?v=f7IWtVbQ5dQ
+
+![GitHub Logo](https://www.youtube.com/watch?v=f7IWtVbQ5dQ)
+
 - Components
 -- Raspberry Pi
 -- Pi Hat

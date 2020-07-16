@@ -10,12 +10,12 @@
 - Project Components:
    * Raspberry Pi - https://www.raspberrypi.org/
    * Raspberry Pi Sense Hat - https://www.raspberrypi.org/products/sense-hat/
-   * AWS Account
+   * AWS Account - https://portal.aws.amazon.com/billing/signup?type=enterprise#/start
    * Wifi network + internet access
 
 # aws account setup
 
-- Create a Lambda function in your account using this code as basis. Customize as needed
+- Create a Lambda function in your AWS account using this code as basis. Customize as needed
 
   https://github.com/scriptbuzz/aws-iot-raspi-sensors/blob/master/IoTLambdaSensorResponse.py
 

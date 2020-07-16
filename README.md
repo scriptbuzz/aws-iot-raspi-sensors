@@ -6,7 +6,8 @@ Watch the project video on YouTube
 
 https://www.youtube.com/watch?v=f7IWtVbQ5dQ
 
-![GitHub Logo](https://www.youtube.com/watch?v=f7IWtVbQ5dQ)
+
+[![IMAGE ALT TEXT HERE](https://img.https://www.youtube.com/watch?v=f7IWtVbQ5dQ/0.jpg)](https://www.youtube.com/watch?v=f7IWtVbQ5dQ)
 
 - Components
 -- Raspberry Pi

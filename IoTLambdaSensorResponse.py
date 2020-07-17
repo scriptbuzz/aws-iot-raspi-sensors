@@ -1,6 +1,7 @@
 # Name: M Bitar
 # Date: March 15, 2020
 # Project: AWS IoT Sensor Rule
+# TODO: Replace the account specific resource properties with yours such as the SNS Topic ARN and region
 
 from __future__ import print_function
   
@@ -37,7 +38,7 @@ def lambda_handler(event, context):
   
   if new_payload == "ALARM": 
     response_sns = sns.publish (
-      TopicArn = 'arn:aws:sns:us-east-1:741689241862:IoT_Sensor_Notify',
+      TopicArn = 'arn:aws:sns:us-east-1:999999999999:IoT_Sensor_Notify',
       Message =  ("WARNING! SENSOR THRESHOLD BREACHED.   " + eventText)
     )
   

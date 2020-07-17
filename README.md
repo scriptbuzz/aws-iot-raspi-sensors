@@ -25,7 +25,7 @@
 
 # aws account setup
 
-- Create a Lambda function in your AWS account using this code as basis. Customize as needed
+- Create a Lambda function in your AWS account using this code as basis. Customize as needed including updating with your account specific resource properties such as your SNS Topic ARN and your default region
 
   https://github.com/scriptbuzz/aws-iot-raspi-sensors/blob/master/IoTLambdaSensorResponse.py
 

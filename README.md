@@ -10,13 +10,14 @@
   * NOW: datetime stamp
   * NODE_ID: unique IoT device identifier/serial number
 
-
+# project video demo
 - To see the project in action, watch this YouTube video
 -- https://www.youtube.com/watch?v=f7IWtVbQ5dQ
 
+# aws architecture
 - Refer to the AWS architecture diagram at the end of this page. 
 
-- Project Components:
+# project components:
    * Raspberry Pi - https://www.raspberrypi.org/
    * Raspberry Pi Sense Hat - https://www.raspberrypi.org/products/sense-hat/
    * AWS Account - https://portal.aws.amazon.com/billing/signup?type=enterprise#/start

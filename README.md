@@ -1,4 +1,4 @@
-# aws-iot-raspi-sensors
+** aws-iot-raspi-sensors **
 
   In this project I use the AWS IoT Core service to monitor and control a Raspberry Pi, over the internet, based on readings of environmental and motion sensors built into the Sense HAT. The Raspberry Pi has built-in support for WiFi which allows it to be connected over the internet to AWS services. The Sense HAT has an array of sensors including: gyroscope, accelerometer, magnetometer, temperature, barometric pressure, and humidity. Additional sensors can be attached to the Raspberry Pi. 
   

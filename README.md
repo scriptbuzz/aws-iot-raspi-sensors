@@ -45,4 +45,4 @@
   https://github.com/scriptbuzz/aws-iot-raspi-sensors/blob/master/aws-iot-test01.py
 
 
-  ![GitHub Logo](mbx-aws-iot-raspi-sensors.jpg)
+  ![aws diagram](mbx-aws-iot-raspi-sensors.jpg)

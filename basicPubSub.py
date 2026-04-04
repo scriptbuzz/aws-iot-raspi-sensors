@@ -66,20 +66,21 @@ AllowedActions = ['both', 'publish', 'subscribe']
 def customCallback(client, userdata, message):
     #print("Received a new command: ")
     global WARN, ALARM, GO, STOP
-    print(message.payload)
-    if "WARN" in message.payload:
+    payload_str = str(message.payload)
+    print(payload_str)
+    if "WARN" in payload_str:
         print("===== ATTENTION: EXECUTE WARN COMMAND =====")
         WARN=True
 
-    elif "ALARM" in message.payload:
+    elif "ALARM" in payload_str:
         print("===== ATTENTION: EXECUTE ALARM COMMAND =====") 
         ALARM=True 
 
-    elif "GO" in message.payload:
+    elif "GO" in payload_str:
         print("===== ATTENTION: EXECUTE GO COMMAND =====")  
         GO=True
         
-    elif "STOP" in message.payload:
+    elif "STOP" in payload_str:
         print("===== ATTENTION: EXECUTE STOP COMMAND =====")  
         STOP=True
 
@@ -172,7 +173,7 @@ while True:
         print("GGGGGGGGGGGGGGGGGGGGGGG")
         sense.clear(green)
         sleep(3)
-        Go=False
+        GO=False
     if ALARM:
         print("AAAAAAAAAAAAAAAAAAAAAAAA")
         sense.clear(red)

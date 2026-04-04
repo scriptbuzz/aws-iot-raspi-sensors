@@ -120,7 +120,7 @@ flowchart LR
     classDef edge fill:#C51A4A,color:#fff,stroke:#fff,stroke-width:2px;
 
     class MQTT,Rule,Lambda,SNS,DynamoDB aws;
-    class Edge,App,Sensors,Display edge;
+    class App,Sensors,Display edge;
 ```
 
 ---

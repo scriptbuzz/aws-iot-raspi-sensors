@@ -68,19 +68,19 @@ def customCallback(client, userdata, message):
     global WARN, ALARM, GO, STOP
     print(message.payload)
     if "WARN" in message.payload:
-        print("===== ATTENTION: EXECUTE WARN COMMMAND =====")
+        print("===== ATTENTION: EXECUTE WARN COMMAND =====")
         WARN=True
 
     elif "ALARM" in message.payload:
-        print("===== ATTENTION: EXECUTE ALARM COMMMAND =====") 
+        print("===== ATTENTION: EXECUTE ALARM COMMAND =====") 
         ALARM=True 
 
     elif "GO" in message.payload:
-        print("===== ATTENTION: EXECUTE GO COMMMAND =====")  
+        print("===== ATTENTION: EXECUTE GO COMMAND =====")  
         GO=True
         
     elif "STOP" in message.payload:
-        print("===== ATTENTION: EXECUTE STOP COMMMAND =====")  
+        print("===== ATTENTION: EXECUTE STOP COMMAND =====")  
         STOP=True
 
            

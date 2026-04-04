@@ -1,5 +1,5 @@
 # Name: M Bitar
-# Project: Demo - Environmental Sensors Loggging
+# Project: Demo - Environmental Sensors Logging
 # Date: March 14, 2020
 #
 from sense_hat import SenseHat

@@ -12,6 +12,12 @@ The payload contains the following data items:
 * `NOW`: The datetime stamp of the reading
 * `NODE_ID`: A unique IoT device identifier/serial number
 
+## About AWS IoT
+AWS IoT (Internet of Things) offerings provide a suite of managed cloud services that let connected devices easily and securely interact with cloud applications and other devices. AWS IoT Core—the foundational service used in this project—can support billions of devices and route trillions of messages, allowing you to connect physical sensors and actuators (like a Raspberry Pi and Sense HAT) to the cloud seamlessly.
+
+Beyond simple message brokering, AWS IoT integrates deeply with the broader AWS ecosystem. Using the built-in IoT Rules Engine, incoming MQTT messages can effortlessly trigger serverless workflows, filter data for analytics, and store historical state. This makes it incredibly straightforward to build highly secure, scalable, and responsive smart applications without needing to provision or manage custom infrastructure.
+
+
 ## Project Video Demo
 To see the project in action, watch this YouTube video:
 [https://www.youtube.com/watch?v=f7IWtVbQ5dQ](https://www.youtube.com/watch?v=f7IWtVbQ5dQ)

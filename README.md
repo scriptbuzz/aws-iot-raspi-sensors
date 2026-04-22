@@ -1,83 +1,127 @@
 # AWS IoT Raspberry Pi Sensors
 
-In this project, I use the AWS IoT Core service to monitor and control a Raspberry Pi over the internet based on readings from environmental and motion sensors built into the Raspberry Pi Sense HAT. 
+![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![AWS IoT](https://img.shields.io/badge/AWS_IoT_Core-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Raspberry Pi](https://img.shields.io/badge/Raspberry_Pi-A22846?style=for-the-badge&logo=raspberry-pi&logoColor=white)
+![MQTT](https://img.shields.io/badge/MQTT-660066?style=for-the-badge&logo=mqtt&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge)
 
-The Raspberry Pi has built-in support for WiFi, which allows it to be connected over the internet to AWS services. The Sense HAT features an array of sensors including a gyroscope, accelerometer, magnetometer, temperature sensor, barometric pressure sensor, and humidity sensor. Additional outward sensors can be attached to the Raspberry Pi as needed.
+> Monitor and control a Raspberry Pi over the internet using AWS IoT Core, MQTT, and environmental sensors from the Raspberry Pi Sense HAT.
 
-The values of sensor readings are passed from the Raspberry Pi via an MQTT topic subscribed to by the AWS IoT Core service. An AWS IoT Rule routes the MQTT topic values to Amazon SNS, DynamoDB, and AWS Lambda. Lambda evaluates the data and sends back control commands to the MQTT topic when a sensor value goes above or below a certain threshold set by the developer.
+[![Watch the Demo](https://img.shields.io/badge/▶_Watch_Demo-YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=f7IWtVbQ5dQ)
 
-The payload contains the following data items:
-* `SENSOR_TYPE`: The type of sensor (e.g., TEMP, HUMIDITY, PRESSURE)
-* `VALUE`: The recorded sensor reading
-* `NOW`: The datetime stamp of the reading
-* `NODE_ID`: A unique IoT device identifier/serial number
+---
 
-## About AWS IoT
-AWS IoT (Internet of Things) offerings provide a suite of managed cloud services that let connected devices easily and securely interact with cloud applications and other devices. AWS IoT Core—the foundational service used in this project—can support billions of devices and route trillions of messages, allowing you to connect physical sensors and actuators (like a Raspberry Pi and Sense HAT) to the cloud seamlessly.
+## Overview
 
-Beyond simple message brokering, AWS IoT integrates deeply with the broader AWS ecosystem. Using the built-in IoT Rules Engine, incoming MQTT messages can effortlessly trigger serverless workflows, filter data for analytics, and store historical state. This makes it incredibly straightforward to build highly secure, scalable, and responsive smart applications without needing to provision or manage custom infrastructure.
-
-
-## Project Video Demo
-To see the project in action, watch this YouTube video:
-[https://www.youtube.com/watch?v=f7IWtVbQ5dQ](https://www.youtube.com/watch?v=f7IWtVbQ5dQ)
+Sensor readings from the Raspberry Pi Sense HAT are published over WiFi via MQTT to AWS IoT Core. An IoT Rule routes the data to **Amazon SNS**, **DynamoDB**, and **AWS Lambda**. Lambda evaluates readings against configurable thresholds and publishes control commands back to the device in real time.
 
 ## AWS Architecture
-Please refer to the AWS architecture diagram included at the bottom of this page.
 
-## Project Components
-* [Raspberry Pi](https://www.raspberrypi.org/)
-* [Raspberry Pi Sense HAT](https://www.raspberrypi.org/products/sense-hat/)
-* [AWS Account](https://portal.aws.amazon.com/billing/signup?type=enterprise#/start)
-* WiFi network with internet access
+![AWS Architecture Diagram](mbx-aws-iot-raspi-sensors.jpg)
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Device | Raspberry Pi + Sense HAT |
+| Protocol | MQTT |
+| Cloud Broker | AWS IoT Core |
+| Rules Engine | AWS IoT Rules |
+| Compute | AWS Lambda |
+| Notifications | Amazon SNS |
+| Storage | Amazon DynamoDB |
+| Language | Python 3 |
+
+---
+
+## MQTT Payload
+
+Each message published by the device contains:
+
+| Field | Description | Example |
+|---|---|---|
+| `SENSOR_TYPE` | Type of sensor reading | `TEMP`, `HUMIDITY`, `PRESSURE` |
+| `VALUE` | Recorded sensor value | `23.4` |
+| `NOW` | ISO datetime of the reading | `2024-01-15T12:00:00` |
+| `NODE_ID` | Unique device serial number | `abc123xyz` |
+
+---
+
+## About AWS IoT Core
+
+AWS IoT Core can support **billions of devices** and route **trillions of messages**, connecting physical sensors to the cloud without provisioning custom infrastructure. Its built-in Rules Engine lets incoming MQTT messages trigger serverless workflows, filter data for analytics, and store historical state — seamlessly integrated with the broader AWS ecosystem.
+
+---
+
+## Project Files
+
+| File | Description |
+|---|---|
+| `aws-iot-test01.py` | Test local Sense HAT behavior — prints sensor readings and drives the LED matrix |
+| `basicPubSub.py` | Main script — connects to AWS IoT, publishes sensor data, and receives control commands |
+| `IoTLambdaSensorResponse.py` | Lambda function — evaluates data, triggers SNS alerts on threshold breaches, and publishes commands back to the device |
+
+---
 
 ## Prerequisites
-1. **Python**: Python 3.x is highly recommended.
-2. **Sense HAT Library**: You will need the Sense HAT library installed on your Raspberry Pi:
-   ```bash
-   sudo apt-get update
-   sudo apt-get install sense-hat
-   ```
-3. **AWS IoT Python SDK**: Must be installed on your Raspberry Pi.
 
-## File Descriptions
-* `aws-iot-test01.py`: Demonstrates local Sense HAT behavior, fetching and printing the sensor readings, and outputting local LED matrix messages.
-* `basicPubSub.py`: The main script that connects the Raspberry Pi to AWS IoT using your certificates, publishes sensor data, and listens (subscribes) for returning command actions.
-* `IoTLambdaSensorResponse.py`: The AWS Lambda code to evaluate IoT Core data, trigger SNS notifications on threshold breaches, and publish control commands back to the device.
+- **Python 3.x**
+- **Sense HAT Library** (on Raspberry Pi):
+  ```bash
+  sudo apt-get update && sudo apt-get install sense-hat
+  ```
+- **AWS IoT Python SDK v1** — [installation guide](https://docs.aws.amazon.com/greengrass/latest/developerguide/IoT-SDK.html)
+- An **AWS Account** with IoT Core access
 
-## Setup & Configuration
+---
 
-### AWS Account Setup
-1. **Lambda Function:** Create a Lambda function in your AWS account using `IoTLambdaSensorResponse.py` as your baseline code.
-2. **Configuration:** Customize the code with your account-specific resource properties:
-   - Ensure the `TopicArn` points to your SNS Topic ARN.
-   - Update your default region in the `boto3.client` calls if you are not using `us-east-1`.
-3. **IAM Permissions:** Your Lambda's assigned IAM Execution Role will need permissions to:
-   - Publish to Amazon SNS (`sns:Publish`)
-   - Publish to AWS IoT Core (`iot:Publish`)
+## Setup
 
-### Raspberry Pi Setup
-1. Follow the instructions on the AWS guide to install the AWS IoT Python SDK v1 on your Raspberry Pi:
-   [AWS IoT SDK Guide](https://docs.aws.amazon.com/greengrass/latest/developerguide/IoT-SDK.html)
+### 1. AWS Side
 
-2. Register a "Thing" in your AWS IoT Core console and explicitly download your:
+1. Create a **Lambda function** using `IoTLambdaSensorResponse.py` as the baseline.
+2. Update the `TopicArn` to point to your SNS Topic ARN.
+3. Update the region in `boto3.client` calls if you are not using `us-east-1`.
+4. Attach an **IAM Execution Role** with these permissions:
+
+   | Permission | Service |
+   |---|---|
+   | `sns:Publish` | Amazon SNS |
+   | `iot:Publish` | AWS IoT Core |
+
+### 2. Raspberry Pi Side
+
+1. Register a **Thing** in the AWS IoT Core console and download:
    - Certificate (`.pem.crt`)
    - Private Key (`-private.pem.key`)
    - Root CA
 
-3. Use the `basicPubSub.py` script provided in this repository (which extends the SDK's basic pub/sub example) alongside your retrieved AWS IoT endpoint and certificates.
+2. Note your **AWS IoT endpoint** from the IoT Core console.
+
+---
 
 ## Usage
 
-You can test local sensor readings first with:
+**Test local sensors:**
 ```bash
 python3 aws-iot-test01.py
 ```
 
-To run the full AWS IoT connection script, you will need to start `basicPubSub.py` utilizing the arguments required by the AWS IoT SDK:
+**Run the full IoT pipeline:**
 ```bash
-python3 basicPubSub.py -e <your-aws-iot-endpoint.amazonaws.com> -r <root-CA-file> -c <certificate-file> -k <private-key-file>
+python3 basicPubSub.py \
+  -e <your-iot-endpoint>.amazonaws.com \
+  -r <root-CA-file> \
+  -c <certificate-file> \
+  -k <private-key-file>
 ```
 
 ---
-![AWS Architecture Diagram](mbx-aws-iot-raspi-sensors.jpg)
+
+## Hardware
+
+- [Raspberry Pi](https://www.raspberrypi.org/) — WiFi-enabled single-board computer
+- [Raspberry Pi Sense HAT](https://www.raspberrypi.org/products/sense-hat/) — gyroscope, accelerometer, magnetometer, temperature, barometric pressure, humidity sensors + LED matrix
